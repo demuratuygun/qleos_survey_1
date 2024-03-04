@@ -1,0 +1,22 @@
+[debug] [2024-02-27T19:35:21.514Z] ----------------------------------------------------------------------
+[debug] [2024-02-27T19:35:21.521Z] Command:       /Users/muratuygun/.nvm/versions/node/v20.11.0/bin/node /Users/muratuygun/.nvm/versions/node/v20.11.0/bin/firebase deploy
+[debug] [2024-02-27T19:35:21.522Z] CLI Version:   13.3.1
+[debug] [2024-02-27T19:35:21.522Z] Platform:      darwin
+[debug] [2024-02-27T19:35:21.522Z] Node Version:  v20.11.0
+[debug] [2024-02-27T19:35:21.522Z] Time:          Tue Feb 27 2024 22:35:21 GMT+0300 (GMT+03:00)
+[debug] [2024-02-27T19:35:21.522Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-27T19:35:21.561Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-27T19:35:21.561Z] > authorizing via signed-in user (qleoscom@gmail.com)
+[debug] [2024-02-27T19:35:21.561Z] [iam] checking project qleos-com for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-02-27T19:35:21.561Z] > refreshing access token with scopes: []
+[debug] [2024-02-27T19:35:21.562Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-02-27T19:35:21.562Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-02-27T19:35:22.046Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-02-27T19:35:22.047Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-02-27T19:35:22.058Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/qleos-com:testIamPermissions [none]
+[debug] [2024-02-27T19:35:22.058Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/qleos-com:testIamPermissions x-goog-quota-user=projects/qleos-com
+[debug] [2024-02-27T19:35:22.059Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/qleos-com:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-02-27T19:35:23.276Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/qleos-com:testIamPermissions 200
+[debug] [2024-02-27T19:35:23.276Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/qleos-com:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-02-27T19:35:23.277Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/qleos-com [none]
