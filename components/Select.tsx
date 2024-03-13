@@ -3,25 +3,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
-  };
-  
-const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-};
  
 
 const write = (text: string) => {
@@ -53,11 +34,11 @@ interface SelectProps {
 const Select: React.FC<SelectProps> = ({ question, options, selectNumber, onNext }) => {
 
     const [ selecteds, setSelecteds ] = useState<string[]>([]);
+    const optionsDelay = question.length * 0.05;
 
     return (
       <motion.div key={question}
         className={'flex flex-col justify-center items-center w-full h-full'}
-        variants={container}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ ease: "easeOut", duration: 1 }}
@@ -68,12 +49,14 @@ const Select: React.FC<SelectProps> = ({ question, options, selectNumber, onNext
           options.map( (option:string, index:number) =>
             <motion.button key={"option-"+option}
               style={selecteds.includes(option)? { backgroundColor: "rgb(68, 64, 60)", color: "rgb(250, 250, 249)" } : {backgroundColor: "rgb(41, 37, 36)", color: "rgb(245, 245, 244)"}}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, delay: optionsDelay+(0.1*index) }}
               onTap={() => setSelecteds( prevSelected => {
                 if (selecteds.includes(option)) return selecteds.filter(s => s!=option);
                 if (selecteds.length >= selectNumber) return [...prevSelected.slice(1), option];
                 return [...prevSelected, option];
               })}
-              variants={item}
               whileTap={{ opacity: 0.5 }}
               className={'m-1.5 p-4 w-full shadow-md text-center text-stone-100 bg-stone-800 font-mono text-sm backdrop-blur-md rounded-md opacity-80 select-none md:text-lg'}
             >
@@ -82,18 +65,19 @@ const Select: React.FC<SelectProps> = ({ question, options, selectNumber, onNext
             )
         }
         <motion.button key={"option-submit"}
-          style={ selecteds.length < selectNumber? 
-            {backgroundColor: "rgb(28 25 23)", color: "rgb(250, 250, 249)"}
-            :{backgroundColor: "rgb(68, 64, 60)", color: "rgb(250, 250, 249)"}
-          }
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2, delay: optionsDelay+(0.1*options.length) }}
           disabled={selecteds.length < selectNumber}
           onTap={() => {if(selecteds.length >= selectNumber) {setSelecteds([]);onNext(selecteds);}}}
-          variants={item}
           whileHover={{ backgroundColor: 'rgb(68 64 60)', color: 'rgb(250 250 249)' }}
           whileTap={{ opacity: 0.5 }}
-          className={'m-1.5 p-4 mt-4 w-full shadow-md text-center font-mono text-sm backdrop-blur-md rounded-md opacity-80 select-none md:text-lg'}
+          className={'m-1.5 p-4 mt-4 w-full shadow-md text-center font-mono text-sm bg-stone-800 backdrop-blur-md rounded-md opacity-80 select-none md:text-lg'}
         >
-          {selecteds.length < selectNumber? selectNumber+" tane seç": 'devam'}
+          {selecteds.length < selectNumber? 
+            <span style={{color: "rgb(225, 140, 140)"}}>{selectNumber+" tane seç"}</span>: 
+            <span style={{color: "rgb(220, 255, 236)"}}>devam</span>
+          }
         </motion.button>
       </motion.div>
     );

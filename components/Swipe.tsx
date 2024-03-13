@@ -25,6 +25,8 @@ const write = (text: string) => {
   );
 }
 
+
+
 interface SwipeProps {
     images: string[],
     onNext: Function
@@ -38,13 +40,10 @@ const Swipe: React.FC<SwipeProps> = ({ images, onNext }) => {
 
     
     const updatelist = (index, value) => {
-      
-      setThumbs(0);
 
       setLikedList( (prevLikedList) => {
         let newlist = prevLikedList;
         newlist[index] = value;
-        console.log( prevLikedList, newlist );
         if( display.length==1 ) onNext(newlist);
         return newlist;
       });
@@ -84,6 +83,7 @@ const Swipe: React.FC<SwipeProps> = ({ images, onNext }) => {
             updatelist(index, -1);
         }}
         onDragEnd={ (event, info) => {
+          setThumbs(0);
           if ( info.offset.x>120 ) 
             updatelist(index, 1);
           else if ( info.offset.x < -120 )
